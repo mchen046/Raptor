@@ -22,10 +22,10 @@ Demonstration: https://youtu.be/adyEfLRWdGE
 	* 3: down
 
 * Select difficulty
-	* Easy
-	* Medium
-	* Hard
-	* God Tier
+	* 0: Easy
+	* 1: Medium
+	* 2: Hard
+	* 3: God Tier
 
 * Easter egg
 	* Press me!
