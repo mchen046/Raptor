@@ -4,7 +4,7 @@ A homage to Raptor: Call of the Shadows, originally released on MS-DOS.
 Demonstration: https://youtu.be/adyEfLRWdGE
 
 ##User Manual##
-* **Button orientation**
+**Button orientation**
 	* rightmost button: 0
 	* second from the right button: 1
 	* second from the left button: 2
@@ -13,7 +13,7 @@ Demonstration: https://youtu.be/adyEfLRWdGE
 
 **Main menu**
 
-*Play
+* Play
 	* 0: right
 	* 1: left
 	* 2: up
