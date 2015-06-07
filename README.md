@@ -5,6 +5,7 @@ Demonstration: https://youtu.be/adyEfLRWdGE
 
 ##User Manual##
 **Button orientation**
+
 	* rightmost button: 0
 	* second from the right button: 1
 	* second from the left button: 2
