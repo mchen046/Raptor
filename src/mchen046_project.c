@@ -527,7 +527,6 @@ void hitPlayer(){
 							disableMatrix();
 						}
 					}
-					//dispArt();
 					LCD_ClearScreen();
 					LCD_DisplayString(1, "You died!");
 					LCD_Cursor(0);
@@ -610,116 +609,116 @@ void bullet(unsigned char pBulletPos, unsigned char eBulletPosA, unsigned char e
 	
 	switch(bullet_state){
 		case -1:
-		bullet_state = bullet_init;
-		break;
+			bullet_state = bullet_init;
+			break;
 		case bullet_init:
-		bullet_state = bullet_wait;
-		break;
-		case bullet_wait:
-		if(playerBulletCnt<2 || enemyBulletCnt<enemyPeriod){
 			bullet_state = bullet_wait;
-			if((playerBulletCnt+1)==2){
-				nextBullet = true;
+			break;
+		case bullet_wait:
+			if(playerBulletCnt<2 || enemyBulletCnt<enemyPeriod){
+				bullet_state = bullet_wait;
+				if((playerBulletCnt+1)==2){
+					nextBullet = true;
+				}
+				if((enemyBulletCnt+1)==enemyPeriod){
+					eNextBullet = true;
+				}
 			}
-			if((enemyBulletCnt+1)==enemyPeriod){
-				eNextBullet = true;
+			else if(!(playerBulletCnt<2) && !(enemyBulletCnt<enemyPeriod)){
+				bullet_state = bullet_dispBoth;
 			}
-		}
-		else if(!(playerBulletCnt<2) && !(enemyBulletCnt<enemyPeriod)){
-			bullet_state = bullet_dispBoth;
-		}
-		else if(!(playerBulletCnt<2) && enemyBulletCnt<enemyPeriod){
-			bullet_state = bullet_dispPlayer;
-		}
-		else if(playerBulletCnt<2 && !(enemyBulletCnt<enemyPeriod)){
-			bullet_state = bullet_dispEnemy;
-		}
-		break;
+			else if(!(playerBulletCnt<2) && enemyBulletCnt<enemyPeriod){
+				bullet_state = bullet_dispPlayer;
+			}
+			else if(playerBulletCnt<2 && !(enemyBulletCnt<enemyPeriod)){
+				bullet_state = bullet_dispEnemy;
+			}
+			break;
 		case bullet_dispPlayer:
-		bullet_state = bullet_wait;
-		break;
+			bullet_state = bullet_wait;
+			break;
 		case bullet_dispEnemy:
-		bullet_state = bullet_wait;
-		break;
+			bullet_state = bullet_wait;
+			break;
 		case bullet_dispBoth:
-		bullet_state = bullet_wait;
-		break;
+			bullet_state = bullet_wait;
+			break;
 		default:
-		bullet_state = bullet_init;
-		break;
+			bullet_state = bullet_init;
+			break;
 	}
 	switch(bullet_state){
 		case bullet_init:
-		break;
+			break;
 		case bullet_wait:
-		playerBulletCnt++;
-		enemyBulletCnt++;
-		break;
+			playerBulletCnt++;
+			enemyBulletCnt++;
+			break;
 		case bullet_dispPlayer:
-		playerBulletCnt = 0;
-		nextBullet = false;
-		break;
+			playerBulletCnt = 0;
+			nextBullet = false;
+			break;
 		case bullet_dispEnemy:
-		enemyBulletCnt = 0;
-		eNextBullet = false;
-		break;
+			enemyBulletCnt = 0;
+			eNextBullet = false;
+			break;
 		case bullet_dispBoth:
-		playerBulletCnt = 0;
-		enemyBulletCnt = 0;
-		eNextBullet = false;
-		nextBullet = false;
+			playerBulletCnt = 0;
+			enemyBulletCnt = 0;
+			eNextBullet = false;
+			nextBullet = false;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 
 enum disp_states {disp_init, disp_test} disp_state;
 void display(){ //test code for LED Matrix
-	
 	switch(disp_state){
 		case -1:
-		disp_state = disp_init;
-		break;
+			disp_state = disp_init;
+			break;
 		case disp_init:
-		disp_state = disp_test;
-		break;
+			disp_state = disp_test;
+			break;
 		case disp_test:
-		disp_state = disp_test;
-		break;
+			disp_state = disp_test;
+			break;
 		default:
-		disp_state = disp_init;
-		break;
+			disp_state = disp_init;
+			break;
 	}
 	switch(disp_state){
 		case disp_init:
-		break;
+			break;
 		case disp_test:
-		//display stuff on LED matrix
-		for(unsigned char j = 0; j<8; j++){
-			for(unsigned char i = 128; i>=1; i/=2){
-				softReset();
-				columnGreen(j);
-				output(i);
-				_delay_ms(100);
-			}
-			j++;
-			bool leave = false;
-			for(unsigned char i = 1; !leave;){
-				softReset();
-				columnGreen(j);
-				output(i);
-				_delay_ms(100);
-				if(i!=128){
-					i*=2;
+			//display stuff on LED matrix
+			for(unsigned char j = 0; j<8; j++){
+				for(unsigned char i = 128; i>=1; i/=2){
+					softReset();
+					columnGreen(j);
+					output(i);
+					_delay_ms(100);
 				}
-				else if(i==128){
-					leave = true;
+				j++;
+				bool leave = false;
+				for(unsigned char i = 1; !leave;){
+					softReset();
+					columnGreen(j);
+					output(i);
+					_delay_ms(100);
+					if(i!=128){
+						i*=2;
+					}
+					else if(i==128){
+						leave = true;
+					}
 				}
 			}
-		}
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 
@@ -730,52 +729,52 @@ void menu(){ //display on LCD display
 	}
 	switch(menu_state){
 		case -1:
-		menu_state = menu_init;
-		break;
+			menu_state = menu_init;
+			break;
 		case menu_init:
-		menu_state = menu_wait;
-		break;
+			menu_state = menu_wait;
+			break;
 		case menu_wait:
-		//counter to create random seed
-		if(!seeded){
-			if(!GetBit(PINA, 1)){
-				seedCnt++;
+			//counter to create random seed
+			if(!seeded){
+				if(!GetBit(PINA, 1)){
+					seedCnt++;
+				}
+				else if(GetBit(PINA, 1)){
+					srand(seedCnt);
+					seeded = true;
+				}
 			}
-			else if(GetBit(PINA, 1)){
-				srand(seedCnt);
-				seeded = true;
+			if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A0 is 1
+				menu_state = menu_waitDiff;
+				menuCnt = 1000;
 			}
-		}
-		if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A0 is 1
-			menu_state = menu_waitDiff;
-			menuCnt = 1000;
-		}
-		else if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A1 is 1
-			menu_state = menu_beforePlay;
-		}
-		else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A2 is 1
-			menu_state = menu_egg;
-		}
-		else{
-			menu_state = menu_wait;
-		}
-		break;
+			else if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A1 is 1
+				menu_state = menu_beforePlay;
+			}
+			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){ //if A2 is 1
+				menu_state = menu_egg;
+			}
+			else{
+				menu_state = menu_wait;
+			}
+			break;
 		case menu_waitDiff:
-		if(GetBit(PINA, 0)){
-			menu_state = menu_waitDiff;
-		}
-		else if(!GetBit(PINA, 0)){
-			menu_state = menu_difficulty;
-		}
-		break;
+			if(GetBit(PINA, 0)){
+				menu_state = menu_waitDiff;
+			}
+			else if(!GetBit(PINA, 0)){
+				menu_state = menu_difficulty;
+			}
+			break;
 		case menu_wait2:
-		if(GetBit(PINA, 0) || GetBit(PINA, 1) || GetBit(PINA, 2) || GetBit(PINA, 3)){
-			menu_state = menu_wait2;
-		}
-		else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){
-			menu_state = menu_wait;
-		}
-		break;
+			if(GetBit(PINA, 0) || GetBit(PINA, 1) || GetBit(PINA, 2) || GetBit(PINA, 3)){
+				menu_state = menu_wait2;
+			}
+			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){
+				menu_state = menu_wait;
+			}
+			break;
 		case menu_beforePlay:
 			if(GetBit(PINA, 1)){
 				menu_state = menu_beforePlay;
@@ -785,69 +784,69 @@ void menu(){ //display on LCD display
 			}
 			break;
 		case menu_play:
-		if(play){
-			menu_state = menu_play;
+			if(play){
+				menu_state = menu_play;
+				break;
+			}
+			else if(!play){
+				menu_state = menu_wait;
+			}
 			break;
-		}
-		else if(!play){
-			menu_state = menu_wait;
-		}
-		break;
 		case menu_difficulty:
-		if(diffSet){
-			menu_state = menu_wait2;
-			menuCnt = 1000;
-			diffSet = false;
-		}
-		else if(!diffSet){
-			menu_state = menu_difficulty;
-		}
-		break;
+			if(diffSet){
+				menu_state = menu_wait2;
+				menuCnt = 1000;
+				diffSet = false;
+			}
+			else if(!diffSet){
+				menu_state = menu_difficulty;
+			}
+			break;
 		case menu_egg:
-		if(GetBit(PINA, 4)){
-			menu_state = menu_wait2;
-		}
-		else if(!GetBit(PINA, 4)){
-			menu_state = menu_wait;
-		}
-		break;
+			if(GetBit(PINA, 4)){
+				menu_state = menu_wait2;
+			}
+			else if(!GetBit(PINA, 4)){
+				menu_state = menu_wait;
+			}
+			break;
 		default:
-		menu_state = menu_init;
-		break;
+			menu_state = menu_init;
+			break;
 	}
 	switch(menu_state){
 		case menu_init:
-		break;
+			break;
 		case menu_wait: //menu selection screen
-		play = false;
-		
-		menuCnt++;
-		if(menuCnt==1001){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, msgList[0]);
-		}
-		
-		if(menuCnt==2000){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, msgList[1]);
-		}
+			play = false;
+			
+			menuCnt++;
+			if(menuCnt==1001){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, msgList[0]);
+			}
+			
+			if(menuCnt==2000){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, msgList[1]);
+			}
 
-		if(menuCnt==3000){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, msgList[2]);
-		}
-		
-		if(menuCnt==4000){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, msgList[3]);
-		}
-		
-		if(menuCnt==5000){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, msgList[4]);
-			menuCnt = 0;
-		}
-		break;
+			if(menuCnt==3000){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, msgList[2]);
+			}
+			
+			if(menuCnt==4000){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, msgList[3]);
+			}
+			
+			if(menuCnt==5000){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, msgList[4]);
+				menuCnt = 0;
+			}
+			break;
 		case menu_beforePlay:
 			dispScore("Score: ");
 			play = true; //play the game
@@ -859,46 +858,46 @@ void menu(){ //display on LCD display
 			moveCond = true;
 			break;
 		case menu_difficulty:
-		play = false;
-		//dispArt();
-		menuCnt++;
-		if(menuCnt==1001){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, diffMsg[0]);
-		}
+			play = false;
+			//dispArt();
+			menuCnt++;
+			if(menuCnt==1001){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, diffMsg[0]);
+			}
 
-		else if(menuCnt==2000){
-			LCD_ClearScreen();
-			LCD_DisplayString(1, diffMsg[1]);
-			menuCnt = 0;
-		}
-		
-		if(GetBit(PINA, 0) || GetBit(PINA, 1) || GetBit(PINA, 2) || GetBit(PINA, 3)){
-			if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //lowest difficulty
-				enemyPeriod = 1000;
+			else if(menuCnt==2000){
+				LCD_ClearScreen();
+				LCD_DisplayString(1, diffMsg[1]);
+				menuCnt = 0;
 			}
-			else if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){
-				enemyPeriod = 750;
+			
+			if(GetBit(PINA, 0) || GetBit(PINA, 1) || GetBit(PINA, 2) || GetBit(PINA, 3)){
+				if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //lowest difficulty
+					enemyPeriod = 1000;
+				}
+				else if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){
+					enemyPeriod = 750;
+				}
+				else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){
+					enemyPeriod = 400;
+				}
+				else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && GetBit(PINA, 3)){
+					enemyPeriod = 200;
+				}
+				diffSet = true;
 			}
-			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){
-				enemyPeriod = 400;
-			}
-			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && GetBit(PINA, 3)){
-				enemyPeriod = 200;
-			}
-			diffSet = true;
-		}
-		break;
+			break;
 		case menu_waitDiff:
-		break;
+			break;
 		case menu_wait2:
-		break;
+			break;
 		case menu_egg:
-		display();
-		break;
+			display();
+			break;
 		default:
-		menu_state = menu_init;
-		break;
+			menu_state = menu_init;
+			break;
 	}
 }
 
@@ -907,92 +906,92 @@ void move(){
 	atEdge();
 	switch(move_state){ //transitions
 		case -1:
-		move_state = move_init;
-		break;
+			move_state = move_init;
+			break;
 		case move_init:
-		move_state = move_wait;
-		break;
+			move_state = move_wait;
+			break;
 		case move_wait:
-		if(moveCond){
-			if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move north
-				move_state = move_north;
+			if(moveCond){
+				if(GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move north
+					move_state = move_north;
+				}
+				else if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move east
+					move_state = move_east;
+				}
+				else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move south
+					move_state = move_south;
+				}
+				else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && GetBit(PINA, 3)){ //move west
+					move_state = move_west;
+				}
+				else{
+					move_state = move_wait;
+				}
 			}
-			else if(!GetBit(PINA, 0) && GetBit(PINA, 1) && !GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move east
-				move_state = move_east;
-			}
-			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && GetBit(PINA, 2) && !GetBit(PINA, 3)){ //move south
-				move_state = move_south;
-			}
-			else if(!GetBit(PINA, 0) && !GetBit(PINA, 1) && !GetBit(PINA, 2) && GetBit(PINA, 3)){ //move west
-				move_state = move_west;
+			//dispShip(); //this statement was causing excessive power consumption
+			break;
+		case move_north:
+			move_state = move_wait;
+			break;
+		case move_east:
+			move_state = move_wait;
+			break;
+		case move_south:
+			move_state = move_wait;
+			break;
+		case move_west:
+			move_state = move_wait;
+			break;
+		case move_wait2:
+			if(GetBit(PINA,0) || GetBit(PINA,1) || GetBit(PINA,2) || GetBit(PINA,3)){
+				move_state = move_wait2;
 			}
 			else{
 				move_state = move_wait;
 			}
-		}
-		//dispShip(); //this statement was causing excessive power consumption
-		break;
-		case move_north:
-		move_state = move_wait;
-		break;
-		case move_east:
-		move_state = move_wait;
-		break;
-		case move_south:
-		move_state = move_wait;
-		break;
-		case move_west:
-		move_state = move_wait;
-		break;
-		case move_wait2:
-		if(GetBit(PINA,0) || GetBit(PINA,1) || GetBit(PINA,2) || GetBit(PINA,3)){
-			move_state = move_wait2;
-		}
-		else{
-			move_state = move_wait;
-		}
-		break;
+			break;
 		default:
-		move_state = move_init;
-		break;
+			move_state = move_init;
+			break;
 	}
 	switch(move_state){ //actions
 		case move_init:
-		break;
+			break;
 		case move_wait:
-		break;
+			break;
 		case move_north:
-		if(!rN){
-			for(unsigned char i = 0; i<2; i++){
-				ship[i].row-=1; //update ship's position
+			if(!rN){
+				for(unsigned char i = 0; i<2; i++){
+					ship[i].row-=1; //update ship's position
+				}
 			}
-		}
-		break;
+			break;
 		case move_east:
-		if(!rE){
-			for(unsigned char i = 0; i<2; i++){
-				ship[i].col+=1; //update ship's position
+			if(!rE){
+				for(unsigned char i = 0; i<2; i++){
+					ship[i].col+=1; //update ship's position
+				}
 			}
-		}
-		break;
+			break;
 		case move_south:
-		if(!rS){
-			for(unsigned char i = 0; i<2; i++){
-				ship[i].row+=1; //update ship's position
+			if(!rS){
+				for(unsigned char i = 0; i<2; i++){
+					ship[i].row+=1; //update ship's position
+				}
 			}
-		}
-		break;
+			break;
 		case move_west:
-		if(!rWEST){
-			for(unsigned char i = 0; i<2; i++){
-				ship[i].col-=1; //update ship's position
+			if(!rWEST){
+				for(unsigned char i = 0; i<2; i++){
+					ship[i].col-=1; //update ship's position
+				}
 			}
-		}
-		break;
+			break;
 		case move_wait2:
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 
@@ -1000,52 +999,52 @@ enum softRest_states {softReset_init, softReset_wait, softReset_reset, softReset
 void softReset(){
 	switch(softReset_state){
 		case -1:
-		softReset_state = softReset_init;
-		break;
+			softReset_state = softReset_init;
+			break;
 		case softReset_init:
-		softReset_state = softReset_wait;
-		break;
+			softReset_state = softReset_wait;
+			break;
 		case softReset_wait:
-		if(GetBit(PINA, 4)){
-			softReset_state = softReset_reset;
-		}
-		else if(!GetBit(PINA, 4)){
-			softReset_state = softReset_wait;
-		}
-		break;
+			if(GetBit(PINA, 4)){
+				softReset_state = softReset_reset;
+			}
+			else if(!GetBit(PINA, 4)){
+				softReset_state = softReset_wait;
+			}
+			break;
 		case softReset_reset:
-		softReset_state = softReset_wait2;
-		break;
-		case softReset_wait2:
-		if(GetBit(PINA, 4)){
 			softReset_state = softReset_wait2;
-		}
-		else if(!GetBit(PINA, 4)){
-			softReset_state = softReset_wait;
-		}
-		break;
+			break;
+		case softReset_wait2:
+			if(GetBit(PINA, 4)){
+				softReset_state = softReset_wait2;
+			}
+			else if(!GetBit(PINA, 4)){
+				softReset_state = softReset_wait;
+			}
+			break;
 		default:
-		softReset_state = softReset_wait;
-		break;
+			softReset_state = softReset_wait;
+			break;
 	}
 	switch(softReset_state){
 		case -1:
-		softReset_state = softReset_init;
-		break;
+			softReset_state = softReset_init;
+			break;
 		case softReset_init:
-		softReset_state = softReset_wait;
-		break;
+			softReset_state = softReset_wait;
+			break;
 		case softReset_wait:
-		break;
+			break;
 		case softReset_reset:
-		flushScreen();
-		initPos();
-		enemyPeriod = 1000;
-		break;
+			flushScreen();
+			initPos();
+			enemyPeriod = 1000;
+			break;
 		case softReset_wait2:
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 
