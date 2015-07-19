@@ -1,4 +1,5 @@
 # Raptor! Embedded Systems - Ed.
+![logo](misc/raptor.png)
 A homage to Raptor: Call of the Shadows, originally released on MS-DOS.
 
 Demonstration: [UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor](https://youtu.be/adyEfLRWdGE)
