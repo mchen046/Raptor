@@ -3,7 +3,7 @@
 
 A homage to Raptor: Call of the Shadows, originally released on MS-DOS.
 
-Demonstration: [UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor](https://youtu.be/adyEfLRWdGE)
+Demonstration: <a href="https://youtu.be/adyEfLRWdGE" target="_blank"<UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor</a>
 
 ##User Manual##
 
