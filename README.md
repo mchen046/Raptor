@@ -7,6 +7,15 @@ Demonstration: <a href="https://youtu.be/adyEfLRWdGE" target="_blank">UCR EE/CS 
 
 ![schematic](schematic.png)
 
+##Technologies and components used##
+
+* ATMega 1284 microcontroller
+* Hitachi hd44780 16x2 LCD display
+* SN74HC595 shift registers
+* LDM-1588AHKBHK 8 x 8 LED matrix
+* OLIMEX device
+* AVR Studio 6.2
+
 ##User Manual##
 
 **Button orientation**
@@ -33,14 +42,5 @@ Demonstration: <a href="https://youtu.be/adyEfLRWdGE" target="_blank">UCR EE/CS 
 
 * Easter egg
 	* Press me!
-
-##Technologies and components used##
-
-* ATMega 1284 microcontroller
-* Hitachi hd44780 16x2 LCD display
-* SN74HC595 shift registers
-* LDM-1588AHKBHK 8 x 8 LED matrix
-* OLIMEX device
-* AVR Studio 6.2
 
 
