@@ -5,7 +5,7 @@ A homage to Raptor: Call of the Shadows, originally released on MS-DOS.
 
 Demonstration: [UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor](https://youtu.be/adyEfLRWdGE)
 
-##User Manual##
+## User Manual ##
 
 **Button orientation**
 
@@ -32,7 +32,7 @@ Demonstration: [UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor](https://yo
 * Easter egg
 	* Press me!
 
-##Technologies and components used##
+## Technologies and Components Used ##
 
 * ATMega 1284 microcontroller
 * Hitachi hd44780 16x2 LCD display
@@ -40,5 +40,3 @@ Demonstration: [UCR EE/CS 120B Spring 2015 -- Michael Chen -- Raptor](https://yo
 * LDM-1588AHKBHK 8 x 8 LED matrix
 * OLIMEX device
 * AVR Studio 6.2
-
-
